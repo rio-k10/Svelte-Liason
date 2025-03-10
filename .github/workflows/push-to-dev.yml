@@ -1,0 +1,44 @@
+name: Dev Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  setup-node:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+  test-app:
+    runs-on: ubuntu-latest
+    needs: setup-node
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Vitest
+        run: npm run test
+
+      - name: Run Cypress
+        run: npx start-server-and-test "npm run dev" http://localhost:3000 "npx cypress run"
+        env:
+          VITE_PORT: 3000

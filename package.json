@@ -11,18 +11,20 @@
 		"prepare": "npx husky install",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint . --fix",
+		"format": "prettier --write --config .prettierrc .",
+		"format:commit": "prettier --write --config .prettierrc",
+		"lint": "prettier --check --config .prettierrc . && eslint ./src --fix --config .eslint.config.js",
+		"lint:commit": "prettier --check --config .prettierrc && eslint --fix --config .eslint.config.js",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run"
 	},
 	"lint-staged": {
-		"src/**/*.{js,ts,svelte,css,html,md}": [
-			"npm run format",
-			"npm run lint"
+		"src/**/*.{js,ts,svelte}": [
+			"npm run format:commit",
+			"npm run lint:commit"
 		],
 		"cypress/**/*.{js,ts}": [
-			"npm run format"
+			"npm run format:commit"
 		]
 	},
 	"devDependencies": {
