@@ -8,10 +8,10 @@
 	import type { Post } from '$lib/types/App';
 
 	const posts = writable<Post[]>([]);
-	let loading = false;
 	const error = writable<string | null>(null);
 	const page = writable<number>(1);
 
+	let loading = false;
 	async function fetchPosts(pageNumber: number) {
 		if (loading) return;
 		loading = true;
@@ -53,7 +53,7 @@
 </script>
 
 <div class="flex h-screen flex-col bg-blue-50">
-	<div class="sticky top-0 z-10 bg-white shadow-md">
+	<div class="test-class sticky top-0 z-10 bg-white shadow-md">
 		<Header />
 	</div>
 	<div class="flex-1 overflow-y-auto">
