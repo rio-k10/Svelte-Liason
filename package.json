@@ -4,7 +4,8 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"cypress": "npx cypress open",
+		"cypress": "npx cypress open --config-file cypress.config.js",
+		"cypress:cli": "npm cypress run --config-file cypress.config.js",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
