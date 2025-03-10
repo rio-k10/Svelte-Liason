@@ -7,13 +7,11 @@
 	import PostList from '$lib/components/PostList/PostList.svelte';
 	import type { Post } from '$lib/types/App';
 
-	// Store definitions
 	const posts = writable<Post[]>([]);
-	let loading = false; // Track loading separately
+	let loading = false;
 	const error = writable<string | null>(null);
 	const page = writable<number>(1);
 
-	// Fetch posts function
 	async function fetchPosts(pageNumber: number) {
 		if (loading) return;
 		loading = true;
@@ -46,12 +44,11 @@
 		const nextPage = currentPage + 1;
 		await fetchPosts(nextPage);
 
-		page.set(nextPage); // Only update if fetch was successful
+		page.set(nextPage);
 	}
 
-	// Define setPosts function to update posts
 	const setPosts = (newPosts: Post[]) => {
-		posts.set(newPosts); // This will update the posts store
+		posts.set(newPosts);
 	};
 </script>
 
